@@ -29,9 +29,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/account/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/account/**").hasRole("USER")
                         .anyRequest().authenticated()
-                );
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.authenticationProvider(authenticationProvider)
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
